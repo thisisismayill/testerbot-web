@@ -192,6 +192,60 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;
 footer .logo{font-size:16px}
 footer .fmeta{font-family:var(--mono);font-size:12px;color:var(--faint)}
 
+
+/* live scan */
+.scan{background:var(--surface-2);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.scanbox{background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  padding:34px;box-shadow:var(--shadow);max-width:820px;margin:0 auto}
+.scanrow{display:flex;gap:12px}
+.scanrow input{flex:1;min-width:0;padding:15px 17px;border:1px solid var(--line);border-radius:12px;
+  background:var(--surface-2);color:var(--ink);font-size:16px;font-family:var(--sans)}
+.scanrow input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+.scanrow input:disabled{opacity:.6}
+.scan-note{font-family:var(--mono);font-size:12px;color:var(--faint);margin-top:12px;text-align:center}
+.scan-err{background:color-mix(in srgb,#c0392b 12%,transparent);color:#c0392b;
+  border:1px solid color-mix(in srgb,#c0392b 30%,transparent);border-radius:11px;
+  padding:12px 15px;font-size:14px;margin-top:16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .scan-err{color:#ff8f80}}
+:root[data-theme="dark"] .scan-err{color:#ff8f80}
+.prog{margin-top:22px}
+.prog .bar{height:8px;border-radius:5px;background:var(--surface-2);overflow:hidden;border:1px solid var(--line-2)}
+.prog .bar span{display:block;height:100%;width:0;border-radius:5px;
+  background:linear-gradient(90deg,var(--accent),var(--signal));transition:width .5s ease}
+.prog .txt{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:13.5px;color:var(--muted)}
+.prog .txt .pct{font-family:var(--mono);color:var(--accent-ink);font-weight:600}
+.res{margin-top:24px;border-top:1px solid var(--line-2);padding-top:22px}
+.sev{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-bottom:20px}
+.sv{border:1px solid var(--line);border-left-width:3px;border-radius:11px;padding:11px 12px;background:var(--surface-2)}
+.sv .n{font-family:var(--mono);font-size:1.4rem;font-weight:600;line-height:1}
+.sv .l{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-top:3px}
+.sv.c{border-left-color:#c0392b}.sv.c .n{color:#c0392b}
+.sv.h{border-left-color:var(--signal)}.sv.h .n{color:var(--signal)}
+.sv.m{border-left-color:#b8860b}.sv.m .n{color:#b8860b}
+.sv.l{border-left-color:var(--accent)}.sv.l .n{color:var(--accent-ink)}
+.sv.i{border-left-color:var(--muted)}.sv.i .n{color:var(--muted)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .sv.c{border-left-color:#ff8f80}
+ :root:not([data-theme="light"]) .sv.c .n{color:#ff8f80}
+ :root:not([data-theme="light"]) .sv.m{border-left-color:#d6a54a}
+ :root:not([data-theme="light"]) .sv.m .n{color:#d6a54a}}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{font-family:var(--mono);font-size:12px;padding:5px 11px;border-radius:8px;
+  background:var(--surface-2);border:1px solid var(--line-2);color:var(--muted)}
+.chip b{color:var(--ink);font-weight:600}
+.finds{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.find{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border:1px solid var(--line-2);
+  border-radius:10px;background:var(--surface-2);font-size:14px}
+.find .tag{font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  padding:3px 8px;border-radius:20px;flex:none;margin-top:1px}
+.tag.critical{background:color-mix(in srgb,#c0392b 16%,transparent);color:#c0392b}
+.tag.high{background:var(--signal-soft);color:var(--signal)}
+.tag.medium{background:color-mix(in srgb,#b8860b 16%,transparent);color:#b8860b}
+.tag.low,.tag.info{background:var(--accent-soft);color:var(--accent-ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .tag.critical{color:#ff8f80}
+ :root:not([data-theme="light"]) .tag.medium{color:#d6a54a}}
+@media (max-width:640px){.scanrow{flex-direction:column}.sev{grid-template-columns:repeat(2,1fr)}
+ .scanbox{padding:24px 20px}}
+
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.2,.6,.2,1),transform .7s cubic-bezier(.2,.6,.2,1)}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}#bg{display:none}}
@@ -208,6 +262,7 @@ footer .fmeta{font-family:var(--mono);font-size:12px;color:var(--faint)}
     <div class="navlinks">
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
+      <a href="#try">Sample report</a>
       <a href="#index">Index</a>
       <a class="btn primary" href="#download">Get started free</a>
     </div>
@@ -226,7 +281,7 @@ footer .fmeta{font-family:var(--mono);font-size:12px;color:var(--faint)}
       <div class="cta-row">
         <a class="btn primary" href="#download">Download free
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg></a>
-        <a class="btn ghost" href="#how">How it works</a>
+        <a class="btn ghost" href="#try">See a real report</a>
       </div>
       <div class="cta-note">No API keys · no third parties · runs on your own machine</div>
     </div>
@@ -400,6 +455,42 @@ footer .fmeta{font-family:var(--mono);font-size:12px;color:var(--faint)}
   </section>
 </div>
 
+
+<div class="scan" id="try">
+  <section>
+    <div class="wrap">
+      <div class="shead">
+        <span class="k">See it first</span>
+        <h2>A real report, before you download anything</h2>
+        <p>This is the actual output — not a mockup. We built a small shop site,
+           broke it on purpose, and pointed the bot at it, so one page can show
+           every kind of problem it catches.</p>
+      </div>
+      <div class="scanbox reveal">
+        <div class="sev">
+          <div class="sv c"><div class="n">5</div><div class="l">Critical</div></div>
+          <div class="sv h"><div class="n">8</div><div class="l">High</div></div>
+          <div class="sv m"><div class="n">8</div><div class="l">Medium</div></div>
+          <div class="sv l"><div class="n">14</div><div class="l">Low</div></div>
+          <div class="sv i"><div class="n">6</div><div class="l">Info</div></div>
+        </div>
+        <div class="chips">
+          <span class="chip">Pages <b>10</b></span>
+          <span class="chip">Took <b>49s</b></span>
+          <span class="chip">Controls clicked <b>3</b></span>
+          <span class="chip">Forms tested <b>4</b></span>
+          <span class="chip">Findings <b>41</b></span>
+        </div>
+        <div style="text-align:center;margin-top:22px">
+          <a class="btn primary" href="sample-report.html" target="_blank" rel="noopener">Open the sample report
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        </div>
+        <div class="scan-note">Every finding opens up — the failing element, a screenshot, and what to change. This is the same file the tool writes to your own machine.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
 <section class="ctaband" id="download">
   <div class="wrap">
     <div class="box reveal">
@@ -455,6 +546,7 @@ footer .fmeta{font-family:var(--mono);font-size:12px;color:var(--faint)}
   pal();size();frame();
   var rt;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){pal();size();},180);});
 })();
+
 </script>
 </body>
 </html>
