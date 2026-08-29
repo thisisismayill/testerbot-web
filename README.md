@@ -1,84 +1,48 @@
-# TesterBot — tanıtım saytı (GitHub + Vercel)
+# TesterBot — website
 
-Bu qovluq TesterBot məhsulunun tanıtım saytıdır — hazır, deploy üçün gözləyir.
-Statik saytdır (build lazım deyil), Vercel-də bir neçə klikə canlıya çıxır.
+The public site for **TesterBot**, a free, open-source website audit tool that runs on your own
+machine: it crawls a site in a real browser and reports accessibility, performance, security, SEO
+and internationalisation problems in one self-contained HTML report.
 
-```
-testerbot-web/
-├── index.html      ← saytın özü (hər şey içindədir)
-├── testerbot.zip   ← "Pulsuz endir" düyməsinin verdiyi fayl (v2.1 alət)
-├── favicon.svg     ← sayt ikonu
-├── vercel.json     ← Vercel ayarları
-└── README.md       ← bu fayl
-```
+**Live:** https://testerbot-web.vercel.app
 
----
+## What is in this repository
 
-## Ən asan yol — terminal yox (GitHub saytı + Vercel)
+| File | What it is |
+|---|---|
+| `index.html` | The landing page. Single file — all CSS and JS inlined, screenshots embedded as data URIs. |
+| `sample-report.html` | A real report produced by the tool, published so people can read one before downloading anything. Self-contained. |
+| `testerbot.zip` | The tool itself (825 KB). Served with `Content-Disposition: attachment` so it downloads instead of opening. |
+| `og-image.png` | 1200×630 social share card referenced by the Open Graph and Twitter tags. |
+| `favicon.svg` | Site icon. |
+| `robots.txt` | Crawl rules; points search engines at the sitemap. |
+| `sitemap.xml` | The two indexable URLs. Update `lastmod` when the pages change. |
+| `vercel.json` | Clean URLs, no trailing slash, and the download header for the zip. |
 
-### 1. GitHub-da repo yarat
-1. [github.com](https://github.com) → giriş et (hesabın yoxdursa pulsuz aç).
-2. Sağ yuxarı **+** → **New repository**.
-3. Ad ver: `testerbot-web` → **Public** → **Create repository**.
+There is no build step. Every page is a single static file: edit it, commit it, and Vercel
+publishes it.
 
-### 2. Faylları yüklə
-1. Yeni repo səhifəsində **uploading an existing file** linkinə bas.
-2. Bu qovluqdakı **bütün faylları** (index.html, testerbot.zip, favicon.svg, vercel.json) sürüşdürüb burax.
-3. Aşağıda **Commit changes** düyməsinə bas.
+## Deploying
 
-### 3. Vercel-ə bağla
-1. [vercel.com](https://vercel.com) → **Continue with GitHub** ilə giriş et.
-2. **Add New… → Project**.
-3. `testerbot-web` reposunu tap → **Import**.
-4. Heç nəyi dəyişmə (Framework: **Other**, build lazım deyil) → **Deploy**.
-5. ~30 saniyəyə saytın canlıdır: `testerbot-web.vercel.app` kimi bir ünvan verəcək.
+The repository is connected to Vercel. Any push to the default branch deploys automatically —
+either by pushing with git, or by using **Add file → Upload files** on GitHub for a one-off change.
 
-Bitdi. Bundan sonra GitHub-a hər dəyişiklik yükləyəndə Vercel avtomatik yeniləyir.
+## SEO checklist
 
----
+Kept here so nothing is forgotten when the pages change:
 
-## Terminal ilə (developer yolu)
+- [x] Unique `<title>` under 65 characters on every page
+- [x] `<meta name="description">` around 150 characters
+- [x] `<link rel="canonical">` on every page
+- [x] Open Graph and Twitter card tags, including `og:image`
+- [x] `SoftwareApplication` JSON-LD on the landing page
+- [x] One `<h1>` per page, no skipped heading levels
+- [x] `alt` text plus `width`/`height` on every image
+- [x] `robots.txt` and `sitemap.xml`
+- [ ] Verified in Google Search Console and the sitemap submitted
+- [ ] A real domain instead of `*.vercel.app`
+- [ ] More indexable content — the landing page is around 650 words
 
-```bash
-cd testerbot-web
-git init && git add . && git commit -m "TesterBot landing"
-# GitHub-da boş repo yarat, sonra:
-git remote add origin https://github.com/İSTİFADƏÇİ/testerbot-web.git
-git branch -M main && git push -u origin main
-```
+## Licence
 
-Sonra Vercel-də reponu **Import** et, ya da Vercel CLI ilə:
-
-```bash
-npm i -g vercel
-vercel        # ilk dəfə: layihəni bağla
-vercel --prod # canlıya çıxar
-```
-
----
-
-## Öz domenini bağlamaq (istəyə bağlı)
-
-Vercel → layihə → **Settings → Domains** → domenini yaz (məs. `testerbot.az`)
-və göstərilən DNS qeydini domen provayderində əlavə et.
-
----
-
-## Nə dəyişdirə bilərsən
-
-- **Mətnlər / başlıqlar:** `index.html` içində birbaşa redaktə et.
-- **Endirilən fayl:** `testerbot.zip`-i yeni versiya ilə əvəz et (adı eyni qalsın).
-- **Rənglər:** `index.html`-in yuxarısındakı `:root { --accent … }` dəyişənləri.
-
----
-
-## Növbəti mərhələ — işlək veb-tətbiq
-
-Bu sayt **statikdir** (yalnız məhsulu göstərir). İstifadəçinin brauzerdə linki yazıb
-canlı test işlətdiyi **işlək versiya** üçün crawler (Playwright) bir serverdə işləməlidir —
-bu, Vercel-də mümkün deyil (serverless funksiyalar üçün çox ağır). O mərhələdə:
-
-- **Frontend** → Vercel (bu repo böyüyür)
-- **Crawler backend** → ayrı bir kiçik server (Railway / Render / Fly / Hetzner)
-
-Hazır olanda birlikdə qurarıq.
+The site content is © its authors. The tool in `testerbot.zip` is MIT licensed.

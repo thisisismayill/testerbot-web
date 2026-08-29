@@ -1,0 +1,8 @@
+# TesterBot — https://testerbot-web.vercel.app
+User-agent: *
+Allow: /
+
+# Search engines: the download itself is not worth crawling
+Disallow: /testerbot.zip
+
+Sitemap: https://testerbot-web.vercel.app/sitemap.xml
